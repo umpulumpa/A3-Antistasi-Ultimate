@@ -20,12 +20,6 @@ if(!alive _vehicle) exitWith
 
 private _vehCrew = crew _vehicle;
 private _aliveCrew = _vehCrew select {alive _x};
-if(count _aliveCrew == 0) exitWith
-{
-    [localize "STR_A3A_Base_breachVeh_header", localize "STR_A3A_Base_breachVeh_no_crew"] call SCRT_fnc_misc_deniedHint;
-    _vehicle lock false;
-    _vehicle removeAction _actionID;
-};
 
 if(side (_aliveCrew select 0) == teamPlayer) exitWith
 {
