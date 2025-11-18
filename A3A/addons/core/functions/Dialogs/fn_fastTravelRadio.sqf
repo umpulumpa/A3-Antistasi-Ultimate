@@ -1,4 +1,46 @@
 private _markersX = markersX + [respawnTeamPlayer];
+private _outposts = [
+	"outpost",
+	"outpost_1",
+	"outpost_2",
+	"outpost_3",
+	"outpost_4",
+	"outpost_5",
+	"outpost_6",
+	"outpost_7",
+	"outpost_8",
+	"outpost_9",
+	"outpost_10",
+	"outpost_11",
+	"outpost_12",
+	"outpost_13",
+	"outpost_14",
+	"outpost_15",
+	"outpost_16",
+	"outpost_17",
+	"outpost_18",
+	"outpost_19",
+	"outpost_20",
+	"outpost_21",
+	"outpost_22",
+	"outpost_23",
+	"outpost_24",
+	"outpost_25",
+	"outpost_26",
+	"outpost_27",
+	"outpost_28",
+	"outpost_29",
+	"outpost_30",
+	"outpost_31",
+	"outpost_32",
+	"outpost_33",
+	"outpost_34",
+	"outpost_35",
+	"outpost_36",
+	"outpost_37",
+	"outpost_38",
+	"outpost_39"
+];
 
 // private _titleStr = localize "STR_A3A_fn_dialogs_ftradio_title";
 private _titleStr = "Fast Travel";
@@ -108,7 +150,7 @@ if (_base == traderMarker && {isTraderQuestAssigned || !isTraderQuestCompleted})
 };
 
 private _rebelMarkers = if (!isNil "traderMarker") then {["Synd_HQ", traderMarker]} else {["Synd_HQ"]};
-private _isValidTargetLocation = (_base in (_rebelMarkers + airportsX + milbases));
+private _isValidTargetLocation = (_base in (_rebelMarkers + airportsX + milbases + _outposts));
 
 if (_checkForPlayer && limitedFT == 1 && !_isValidTargetLocation) exitWith {
 	[localize "STR_A3A_Dialogs_fast_travel_header", localize "STR_A3A_Dialogs_fast_travel_limited"] call SCRT_fnc_misc_deniedHint;
@@ -116,7 +158,7 @@ if (_checkForPlayer && limitedFT == 1 && !_isValidTargetLocation) exitWith {
 
 private _withinBoundaries = true;
 if (limitedFT == 2) then {
-	private _rebelLocations = (_rebelMarkers + airportsX + milbases) select { sidesX getVariable _x == teamPlayer };
+	private _rebelLocations = (_rebelMarkers + airportsX + milbases + _outposts) select { sidesX getVariable _x == teamPlayer };
 	private _nearestPosition = [_rebelLocations, player] call BIS_Fnc_nearestPosition;
 	private _distanceToNearest = player distance getMarkerPos _nearestPosition;
 	_withinBoundaries = _distanceToNearest < 50;	

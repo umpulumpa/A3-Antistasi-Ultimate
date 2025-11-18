@@ -26,6 +26,9 @@
 
 params ["_vehicle"];
 
+// Prevent the hold action from being registered
+if (true) exitWith {};
+
 [ 
     _vehicle,
     localize "STR_A3AU_action_lockpick_title",
