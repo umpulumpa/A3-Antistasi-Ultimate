@@ -26,10 +26,27 @@
 
 params ["_vehicle"];
 
-// Prevent the hold action from being registered
-if (true) exitWith {};
+private _vehicleType = typeOf _vehicle;
+private _factionData = missionNamespace getVariable ["A3A_faction_all", createHashMap];
+private _tanks = _factionData getOrDefault ["vehiclesTanks", []];
+private _apcs = _factionData getOrDefault ["vehiclesAPCs", []];
+private _isTank = _vehicleType in _tanks;
+private _isAPC = _vehicleType in _apcs;
 
-[ 
+[format ["Lockpick request for %1 | tank=%2 | apc=%3", _vehicleType, _isTank, _isAPC], _fnc_scriptName] call A3U_fnc_log;
+
+// Skip heavy armor, keep lockpicks for cars/helis/jets
+if (_isTank || {_isAPC}) exitWith {
+    [format ["Skipping lockpick action for %1 (heavy armor)", _vehicleType], _fnc_scriptName] call A3U_fnc_log;
+};
+
+private _existingActionId = _vehicle getVariable ["A3U_lockpickActionId", -1];
+if (_existingActionId != -1) then {
+    [_vehicle, _existingActionId] call BIS_fnc_holdActionRemove;
+    [format ["Removed old lockpick action from %1 (id %2)", _vehicleType, _existingActionId], _fnc_scriptName] call A3U_fnc_log;
+};
+
+private _actionId = [ 
     _vehicle,
     localize "STR_A3AU_action_lockpick_title",
     "\a3\ui_f\data\igui\cfg\actions\repair_ca.paa",
@@ -71,3 +88,8 @@ if (true) exitWith {};
     false,
     false
 ] call BIS_fnc_holdActionAdd;
+
+[format ["Lockpick hold action added to %1 with id %2", _vehicleType, _actionId], _fnc_scriptName] call A3U_fnc_log;
+_vehicle setVariable ["A3U_lockpickActionId", _actionId];
+[format ["Stored lockpick action id %1 on %2", _actionId, _vehicleType], _fnc_scriptName] call A3U_fnc_log;
+[format ["Lockpick hold action added to %1 with id %2", _vehicleType, _actionId], _fnc_scriptName] call A3U_fnc_log;

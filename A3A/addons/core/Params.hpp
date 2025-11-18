@@ -1121,8 +1121,8 @@ class Params
     class vehicleLockpickTime: VehicleLootParams
     {
         title = $STR_params_vehicleLockpickTime;
-        values[] = {30,60,120};
-        texts[] = {"30s", "60s", "120s"};
+        values[] = {30,60,120,300};
+        texts[] = {"30s", "60s", "120s", "600s"};
         default = 60;
     };
     class MiscLootParamsSpacer : LootParams
