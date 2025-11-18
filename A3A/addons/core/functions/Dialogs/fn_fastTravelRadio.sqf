@@ -42,6 +42,49 @@ private _outposts = [
 	"outpost_39"
 ];
 
+private _seaports = [
+	"seaport",
+	"seaport_1",
+	"seaport_2",
+	"seaport_3",
+	"seaport_4",
+	"seaport_5",
+	"seaport_6",
+	"seaport_7",
+	"seaport_8",
+	"seaport_9",
+	"seaport_10",
+	"seaport_11",
+	"seaport_12",
+	"seaport_13",
+	"seaport_14",
+	"seaport_15",
+	"seaport_16",
+	"seaport_17",
+	"seaport_18",
+	"seaport_19",
+	"seaport_20",
+	"seaport_21",
+	"seaport_22",
+	"seaport_23",
+	"seaport_24",
+	"seaport_25",
+	"seaport_26",
+	"seaport_27",
+	"seaport_28",
+	"seaport_29",
+	"seaport_30",
+	"seaport_31",
+	"seaport_32",
+	"seaport_33",
+	"seaport_34",
+	"seaport_35",
+	"seaport_36",
+	"seaport_37",
+	"seaport_38",
+	"seaport_39"
+];
+
 // private _titleStr = localize "STR_A3A_fn_dialogs_ftradio_title";
 private _titleStr = "Fast Travel";
 if (limitedFT == 3) exitWith {[_titleStr, "Fast travel is disabled for this server."] call A3A_fnc_customHint}; // [_titleStr, localize "STR_A3A_fn_dialogs_ftradio_no_param"]
@@ -150,7 +193,7 @@ if (_base == traderMarker && {isTraderQuestAssigned || !isTraderQuestCompleted})
 };
 
 private _rebelMarkers = if (!isNil "traderMarker") then {["Synd_HQ", traderMarker]} else {["Synd_HQ"]};
-private _isValidTargetLocation = (_base in (_rebelMarkers + airportsX + milbases + _outposts));
+private _isValidTargetLocation = (_base in (_rebelMarkers + airportsX + milbases + _outposts + _seaports));
 
 if (_checkForPlayer && limitedFT == 1 && !_isValidTargetLocation) exitWith {
 	[localize "STR_A3A_Dialogs_fast_travel_header", localize "STR_A3A_Dialogs_fast_travel_limited"] call SCRT_fnc_misc_deniedHint;
@@ -158,7 +201,7 @@ if (_checkForPlayer && limitedFT == 1 && !_isValidTargetLocation) exitWith {
 
 private _withinBoundaries = true;
 if (limitedFT == 2) then {
-	private _rebelLocations = (_rebelMarkers + airportsX + milbases + _outposts) select { sidesX getVariable _x == teamPlayer };
+	private _rebelLocations = (_rebelMarkers + airportsX + milbases + _outposts + _seaports) select { sidesX getVariable _x == teamPlayer };
 	private _nearestPosition = [_rebelLocations, player] call BIS_Fnc_nearestPosition;
 	private _distanceToNearest = player distance getMarkerPos _nearestPosition;
 	_withinBoundaries = _distanceToNearest < 50;	
