@@ -2859,8 +2859,8 @@ class Params
     {
         title = $STR_params_vehicleLockpickTime;
         tooltip = $STR_params_vehicleLockpickTime_desc;
-        values[] = {30,60,120};
-        texts[] = {"30s", "60s", "120s"};
+        values[] = {30,60,120, 300};
+        texts[] = {"30s", "60s", "120s", "600s"};
         class difficulty
         {
             class solo
