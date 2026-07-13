@@ -2868,10 +2868,12 @@ class Params
                 easy = 30;
                 medium = 60;
                 hard = 120;
+                extreme = 300;
             };
             class small : solo {};
             class medium : solo {};
             class large : solo {};
+            class extreme : solo {};
         };
         default = 60;
     };
